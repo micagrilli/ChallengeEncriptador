@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			
+		<title>Encriptador</title>
+		
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<script>
+			//funciones para mostrar/ocultar elementos
+			function mostrarCaja(){
+				var x = document.getElementById('encriptado');
+				var y = document.getElementById('desencriptado');
+	
+				x.style.display = 'none';
+				y.style.display = 'block';
+				
+			}
+			function ocultarCaja(){
+				var x = document.getElementById('encriptado');
+				var y = document.getElementById('desencriptado');
+	
+				x.style.display = 'block';
+				y.style.display = 'none';
+				
+			}
+	
+			//funcióm para encriptar
+			function encriptarTexto(texto){
+				//capturar texto
+				var texto = document.getElementById('texto').value;
+                //ver si viene texto
+				if(texto!= ''){   
+					var cifrado = texto.replace(/e/gi, "enter").replace(/i/gi, "imes").replace(/a/gi, "ai").replace(/o/gi, "ober").replace(/u/gi, "ufat");;
+					mostrarCaja();
+					document.getElementById('textoSalida').value = cifrado;	
+                }else{
+					ocultarCaja();
+				}
+				
+			}
+	
+			//funcióm para desencriptar
+			function desencriptarTexto(){
+				//capturar texto
+				var textoEncriptado = document.getElementById('texto').value;
+	
+				//ver si viene texto
+				if(textoEncriptado!= ''){
+					//lógica de la encriptación
+					var noCifrado = textoEncriptado.replace(/enter/gi, "e").replace(/imes/gi, "i").replace(/ai/gi, "a").replace(/ober/gi, "o").replace(/ufat/gi, "u");;
+					mostrarCaja();
+					document.getElementById('textoSalida').value = noCifrado;
+				}else{
+					ocultarCaja();
+				}
+			} 
+			
+			//remover acentos
+			function modificarTexto(str) {
+				return (str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")).toLowerCase();
+			} 
+	
+		</script>
+
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<h1>Challenge</h1>
+			</header>
+
+		<!-- Main -->
+			<section id="main" class="wrapper sidebar right">
+				<div class="inner">
+                    <header class="major">
+						<h3>Encripta tu mensaje</h3>						
+					</header>
+					<!-- Content -->
+						<div class="content">							
+							<textarea id="texto" name="textarea" 
+                                onClick='this.value=""' onkeyup="this.value=modificarTexto(this.value)">Ingrese el texto aquí</textarea>
+                            <br>	
+							<p><img src="images/Vector.png" alt="exclamacion" id="vector">
+            				Solo letras minúsculas y sin acentos</p>
+							<footer>
+								<ul class="actions">									
+									<li><button class="button" onclick="encriptarTexto()">Encriptar</button></li>
+            						<li><button class="button" onclick="desencriptarTexto()">Desencriptar</button></li>
+								</ul>
+							</footer>						
+						</div>
+						
+
+					<!-- Sidebar -->
+						<div class="sidebar">
+
+							<section id="encriptado">
+								<img id="muneco" src="images/muneco.png" alt="muneco"> 
+								<h3>Ningún mensaje fue encontrado</h3>
+								<p>Ingresa el texto que desees encriptar o desencriptar.</p>
+							</section>
+
+							<section id="desencriptado" style="display: none">
+								<textarea name="textoSalida" id="textoSalida" ></textarea>	
+								<br>							
+								<footer>
+									<ul class="actions">
+										<li><button id="copy">Copiar</button></li>
+									</ul>
+								</footer>
+								<script>
+
+									function copy() {
+									let copyText = document.querySelector("#textoSalida");
+									copyText.select();
+									document.execCommand("copy");
+									}
+
+									document.querySelector("#copy").addEventListener("click", copy);
+
+								</script>
+							</section>
+
+						</div>
+
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				
+				<p class="copyright">&copy; Micaela Grilli.<br />
+				
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
